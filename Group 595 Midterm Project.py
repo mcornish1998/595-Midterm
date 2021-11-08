@@ -9,7 +9,7 @@ from nltk import tokenize
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 nltk.download('averaged_perceptron_tagger')
-
+app = flask.Flask(__name__)
 
 
 
@@ -112,3 +112,25 @@ def definition(text):
 
 
 @app.route('/inst', methods=['GET'])
+def inst():
+    return flask.render_template("inst.html")
+
+
+@app.route('/nlp', methods=['POST'])
+def nlp():
+    post_json = flask.request.json
+    text = post_json.get('text', None)
+    if text:
+        responses = {'Sentiment': sentiment(text), 'Subjectivity': pol_sub(text), 'Common words': commonwords(text),
+                    'POS Count': pos_count(text), 'Singularize': singularize(text),
+                    'Sentences': sentences(text), 'Definition': definition(text), 'Filtered Sentence': stop_filter(text)}
+
+        return {"success": True, 'response': responses}
+
+    else:
+        return {'success': False, 'error': 'No string passed'}, 400
+
+if __name__ == "__main__":
+    nltk.download("punkt")
+    nltk.download('averaged_perceptron_tagger')
+    app.run()
