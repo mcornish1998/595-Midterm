@@ -75,3 +75,40 @@ def pos_count(text):
     except Exception as e:
         print(e)
         return 'Error counting parts of speech'
+   
+def singularize(text):
+    try:
+        singularize = ''
+        for x in TextBlob(text).words:
+            singularize = singularize + x.singularize() + ' '
+        return singularize
+    except:
+        return 'Error calculating singularization'
+
+
+def sentences(text):
+    try:
+        analyzer = SentimentIntensityAnalyzer()
+        results = []
+        for x in tokenize.sent_tokenize(text):
+            compound = analyzer.polarity_scores(x)['compound']
+            results.append([x.replace('\n', ' '), compound])
+        sent_scores = pd.DataFrame(results, columns=['Sentence', 'Compound']).sort_values('Compound',ascending=False)
+        return sent_scores.to_dict()
+    except:
+        return 'Error occurred finding sentence scores'
+
+
+def definition(text):
+    try:
+        words = TextBlob(text)
+        words = words.words
+        word_list = []
+        for x in words:
+            word_list.append({x: Word.define(x)})
+        return word_list
+    except:
+        return 'Error occurred finding definitions'
+
+
+@app.route('/inst', methods=['GET'])
