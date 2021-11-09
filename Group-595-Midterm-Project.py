@@ -147,6 +147,7 @@ def nlp():
         return {'success': False, 'error': 'No string passed'}, 400
 
 if __name__ == "__main__":
+    import nltk
     nltk.download("punkt")
     nltk.download("stopwords")
     nltk.download("word_tokenize")
