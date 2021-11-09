@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h4 style="color:red;">All functions run at once when the user accesses the /nlp endpoint as a post request.
-For an input please provide a string in the JSON format such as: "{
-    "text": "Lightning Paradise was the local hangout joint where the group usually ended up spending the night."
+<h4 style="color:red;">All functions run viaa POST the /nlp endpoint. The endpoint accepts input in the form of a string in the JSON format such as: "{
+    "text": "Lightning Paradise was the local hangout joint where the group usually ended up spending the night.",
+    "functions": ["Singularize", "Sentiment"]
 }" </h4>
 </body>
 </html>
