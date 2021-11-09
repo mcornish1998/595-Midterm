@@ -125,7 +125,7 @@ def nlp():
         if functions: 
             responses = {}
             if 'Sentiment' in functions:
-                responses['Sentiment] = sentiment(text)
+                responses['Sentiment'] = sentiment(text)
             if 'Subjectivity' in functions:
                 responses['Subjectivity'] = pol_sub(text)
             if 'Common words' in functions:
