@@ -148,8 +148,8 @@ def nlp():
 
 if __name__ == "__main__":
     import nltk
-    nltk.download("punkt")
-    nltk.download("stopwords")
-    nltk.download("word_tokenize")
+    nltk.download('punkt')
+    nltk.download('stopwords')
+    nltk.download('word_tokenize')
     nltk.download('averaged_perceptron_tagger')
     app.run()
