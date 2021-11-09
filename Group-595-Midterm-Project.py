@@ -121,9 +121,26 @@ def nlp():
     post_json = flask.request.json
     text = post_json.get('text', None)
     if text:
-        responses = {'Sentiment': sentiment(text), 'Subjectivity': pol_sub(text), 'Common words': commonwords(text),
-                    'POS Count': pos_count(text), 'Singularize': singularize(text),
-                    'Sentences': sentences(text), 'Definition': definition(text), 'Filtered Sentence': stop_filter(text)}
+        functions = post_json.get('functions', None)
+        if functions: 
+            responses = {}
+            if 'Sentiment' in functions:
+                responses['Sentiment] = sentiment(text)
+            if 'Subjectivity' in functions:
+                responses['Subjectivity'] = pol_sub(text)
+            if 'Common words' in functions:
+                responses['Common words'] = commonwords(text)
+            if 'POS Count' in functions:
+                responses['POS Count'] = pos_count(text)
+            if 'Singularize' in functions:
+                responses['Singularize'] = singularize(text)
+            if 'Sentences' in functions:
+                responses['Sentences'] = sentences(text)
+            if 'Definitiion' in functions:
+                responses['Definition'] = definition(text)
+            if 'Filtered Sentence' in functions:
+                responses['Filetered Sentence'] = stop_filter(text)              
+
 
         return {"success": True, 'response': responses}
 
